@@ -6,6 +6,8 @@
 Welcome to IC_Ahmed_WindTunnel's documentation!
 ===============================================
 
+This is the first version of the lab documents of the wind tunnel experiment on RL flow control for drag reduction of an Ahmed body.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
