@@ -1,3 +1,5 @@
+.. _Software Setup:
+
 Software Setup
 ==============
 
@@ -51,11 +53,13 @@ The installation commands of the required packages is shown below through *anaco
    The commands of installation may change over time (especially pytorch). Please search for the latest commands corresponding to the version if the commands in this document fail.
    There may be a conflict of package version due to drl-platform and gym. Please ignore this or try other versions to solve the issue.
 
-`Labview <https://www.ni.com/en-gb/shop/labview.html>`_ 2021 is used to handle data acquisition	and communication together with NI devices such as PXI and PCIe card. Details of hardware setup please see "Hardware Setup".
+`Labview <https://www.ni.com/en-gb/shop/labview.html>`_ 2021 is used to handle data acquisition	and communication together with NI devices such as PXI and PCIe card. Details of hardware setup please see :ref:`Hardware Setup <Hardware Setup>`.
 
 A Real-time Labview module needs to be installed both on PXI and host PC. First, download and install Labview and VI Package Manager on host PC. The Real-time module can be installed/modified from the VI Package Manager as the `official support <https://knowledge.ni.com/KnowledgeArticleDetails?id=kA03q000000x1r4CAA&l=en-GB>`_.
 
-After installing the Real-time Labview on host PC, for the next step, the PXI needs to be booted in RT mode and connected to the host PC. Please see "Real-time PXI" for details.
+After installing the Real-time Labview on host PC, for the next step, the PXI needs to be booted in RT mode and connected to the host PC. Please see `Real-time PXI`_ for details.
+
+.. _Real-time PXI:
 
 Real-time PXI
 -------------
@@ -81,8 +85,7 @@ Then, the RT PXI can be connected to the PC in Labview:
 
 .. note::
 
-   If VIs are saved and deployed under the PXI target, they will run on the PXI instead of the PC. More details of how to run the Labview codes please refer to "Experiment Manual".
+   If VIs are saved and deployed under the PXI target, they will run on the PXI instead of the PC. More details of how to run the Labview codes please refer to :ref:`Experiment Manual <Experiment Manual>`. See a `YouTube tutorial <https://www.youtube.com/watch?v=I43pZm0SeCQ>`_ to get familiar with running Labview in RT target.
 
-.. note::
 
-   See a `YouTube tutorial <https://www.youtube.com/watch?v=I43pZm0SeCQ>`_ to get familiar with running Labview in RT target.
+   
