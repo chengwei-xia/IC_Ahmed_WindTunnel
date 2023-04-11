@@ -1,0 +1,11 @@
+[My Computer]
+My Computer = "192.168.1.192"
+
+[Networked Computer/Device]
+Networked Computer/Device = "192.168.1.192"
+
+[NI-PXIe8135-2F14294D]
+NI-PXIe8135-2F14294D = "192.168.1.181"
+
+[NI-PXIe8135-2F14294D 2]
+NI-PXIe8135-2F14294D 2 = "192.168.10.181"

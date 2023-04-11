@@ -26,9 +26,9 @@ The circuit box is sealed in a metal box to avoid electromagnetic interference. 
 
 - VDD -- Black wire -- 5V
 - Vss -- Green wire -- Digital Ground
-- CLK -- Blue wire  -- PFI13 (CTR1 channel)
-- CSn -- 
-- DO  -- PicoBlade wires -- 
+- CLK -- Blue wire  -- PFI13 (CTR1 OUT)
+- CSn -- BNC cable  -- PFI12 (CTR0 OUT)
+- DO  -- PicoBlade wires -- P0.0 - P0.3 (refer to Labview code)
 
 .. _Flaps:
 
