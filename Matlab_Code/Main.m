@@ -10,9 +10,9 @@ set(0,'DefaultTextInterpreter','latex')
 set(0,'DefaultAxesFontSize',14)
 
 %------------ Data Path ----------------
-PathName = '/Users/chengweixia/Documents/Exp_Data_2023/Data_Eva_RNNPPO/';
-FileNameESP ='ESPData_22_03_Run3_PPOEvaluation.dat';
-FileNameRT ='RTData_22_03_Run3_PPOEvaluation.dat';
+PathName = '/Users/chengweixia/Documents/Exp_Data_2023/30_Mar_RNNPPO1/';
+FileNameESP ='ESPData_30_03_Run7_Base.dat';
+FileNameRT ='RTData_30_03_Run7_Base.dat';
 %---------------------------------------
 
 %------------ Code path -----------------------
@@ -53,28 +53,26 @@ N_Force     = 3;
 
 fscale      = 0.216/15; % Nondimensionlize frequency to St, with respect to the width of the body
 fscale_z    = 0.160/15; % Nondimensionlize with the height of the body
-nwindow     = 2^9; % Length of the window used in pwelch 
+nwindow     = 2^8; % Length of the window used in pwelch 
                    % Smaller window provides smoother psd but larger window provides larger frequency range
 movavg_window = 1000;
 
 nchanESP = 64;
 FsESP = 100;
-nchanRT = 22;
-FsRT = 50;
+nchanRT = 26;
+FsRT = 100;
 
-%% Parameters for PSD Figures
+k = 2; % Index of "data"
 
-Select.All = false;
-Select.Endev = true;
-Select.Force = true;
-Select.Modal = true;
-FigNum = [12,13,14];
+AnalyseTraining = false;
+TrainingSet = []; % Step numbers of training data, removing RL reset phases and UDP restart intervals
+
 
 %% Read ESP
 
 fid = fopen([PathName,FileNameESP],'r','a');
 DataESP = fread(fid,[nchanESP,inf],'float32');
-DataESP=DataESP(:,10000:20000);
+DataESP=DataESP(:,:);
 fclose(fid);
 
 [np,nt] = size(DataESP);
@@ -87,10 +85,15 @@ disp('Loaded ESP data')
 
 fid = fopen([PathName,FileNameRT],'r','a');
 DataRT = fread(fid,[nchanRT,inf],'float64');
-DataRT=DataRT(:,1000:8000);
+if AnalyseTraining == true
+    DataRT = DataRT(:,TrainingSet);
+else
+DataRT=DataRT(:,:);
+end
 fclose(fid);
 
 [np,nt] = size(DataRT);
+Time = (1:nt)/FsRT;
 
 tRT = 0:1/FsRT:((nt-1)/FsRT);
 
@@ -104,7 +107,20 @@ disp('Loaded RT data')
 %% Plot time-series
 
 figure(1);hold all
-plot(DataRT(16,:))
+plot(DataRT(8,1:end))
+%plot(DataESP(2,:))
+
+%% Plot Actions
+
+figure(111);hold all
+for i = 1:4
+plot(Time,DataRT(22+i,1:end))
+end
+set(gca,'TickLabelInterpreter','latex');
+set(gca,'Linewidth',1);
+set(gca,'Fontsize',16);
+xlabel("Time")
+ylabel("Actions")
 %plot(DataESP(2,:))
 
 %% Plot Moving Average
@@ -113,15 +129,27 @@ MovA_P = movmean(DataRT(1:N_Endev,:),movavg_window,2);
 MovA_F = movmean(DataRT(Chan_Force:Chan_Force+N_Force,:),movavg_window,2);
 figure(6); clf; hold all
 for j = 1:N_Endev
-plot(MovA_P(j,:));
+plot(Time,MovA_P(j,:),'LineWidth',2);
 end
+set(gca,'TickLabelInterpreter','latex');
+set(gca,'Linewidth',1);
+set(gca,'Fontsize',16);
+xlabel("Time")
+ylabel("Moving Average - Pressure")
+xlim([0,Time(end)])
 figure(7); clf; hold all
 for i = 1:N_Force
-plot(MovA_F(i,:));
+plot(Time,MovA_F(i,:),'LineWidth',2);
 end
+legend('Drag','SideForce','Lift','interpreter','latex','Location','best')
+set(gca,'TickLabelInterpreter','latex');
+set(gca,'Linewidth',1);
+set(gca,'Fontsize',16);
+xlabel("Time")
+ylabel("Moving Average - Force")
+xlim([0,Time(end)])
 
 %% Mean-RMS
-k = 2;
 
 data(k).Pmean = mean(DataRT(1:N_Endev  ,:),2);
 data(k).Fmean = mean(DataRT(Chan_Force:Chan_Force+N_Force-1,:),2);
@@ -179,7 +207,16 @@ tmp = sum(DataRT([2,3,4],:),1) - sum(DataRT([7,6,5],:),1) ;
 
 
 %% Plot PSD Figures
+
+Select.All = false;
+Select.Endev = true;
+Select.Force = true;
+Select.Modal = true;
+Select.CoP = false;
+FigNum = [12,13,14];
+
 PSDPlot(data(2),FigNum,Select)
+hold all
 
 %% Plot Mean-rms Pressure
 
@@ -242,17 +279,44 @@ Ny = 8;
 resX = 8;
 resY = 8;
 plotESP_Ahmed(mean(DataESP,2), Nx, Ny, resX, resY)
+xlabel("Y")
+ylabel("Z")
 
 %% Plot CoP
 
 [CoPx,CoPy] = EvalCoP( DataESP ); % x is the width and y is the height here
+data(k).Cpsd = zeros(1,nwindow/2+1);
+
+[data(k).Cpsd(1,:),data(k).Cfpsd] = pwelch(detrend(CoPx(1,:)),hanning(nwindow),0.5*nwindow,nwindow,FsESP*fscale);
+
 time = (1:size(CoPx,2))*1/FsESP;
 figure(18);clf;hold all
 plot(time,CoPx)
+set(gca,'TickLabelInterpreter','latex');
+set(gca,'Linewidth',1);
+set(gca,'Fontsize',16);
+xlabel("Time")
+ylabel("CoP")
 %plot(CoPy)
+
+%% Plot PSD of CoP
+Select.All = false;
+Select.Endev = false;
+Select.Force = false;
+Select.Modal = false;
+Select.CoP = true;
+FigNum = [0 0 0 19];
+
+PSDPlot(data(2),FigNum,Select)
+hold all
 
 %% Plot PDF of CoP
 
 % histograms of CoP
-figure(19);clf;hold all
-histogram(CoPx(1:10000),20)
+figure(20);clf;hold all
+histogram(CoPx,100)
+set(gca,'TickLabelInterpreter','latex');
+set(gca,'Linewidth',1);
+set(gca,'Fontsize',16);
+xlabel("CoP")
+ylabel("PDF")

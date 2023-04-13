@@ -168,7 +168,7 @@ For installation details, the mounting side on the wooden plate and the plate fo
 Linear Screw
 ------------
 
-The linear screw in the Ahmed body is used to adjust static position of the flaps. In the present experiment, linear screws are only used to zero the static flap angles. For details of zeroing flaps and Labview code for implementation, please refer to :ref:`Zeroing <Zeroing>`.
+The linear screw in the Ahmed body is used to adjust static position of the flaps. In the present experiment, linear screws are only used to tare the static flap angles. For details of taring flaps and Labview code for implementation, please refer to :ref:`Taring <Taring>`.
 
 **Add a picture of a linear screw used in this experiment.**
 

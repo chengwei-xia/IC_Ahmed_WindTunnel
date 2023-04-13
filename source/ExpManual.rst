@@ -3,7 +3,7 @@
 Experiment Manual
 =================
 
-This section demonstrates the procedures of conducting this wind tunnel experiment properly, including cable connection from Ahmed body to PXI, sensors & actuators zeroing, and how to run the experiment.
+This section demonstrates the procedures of conducting this wind tunnel experiment properly, including cable connection from Ahmed body to PXI, sensors & actuators taring, and how to run the experiment.
 
 .. _Cable Connection:
 
@@ -66,14 +66,14 @@ Linear screws are driven by DC motors, and the power cables of these DC motors a
    In Labview code, the port number and slot for connection may be changed over time. Please check the channel initialisation part for each sensors/actuators to make sure you use the correct ports or slots.
 
 
-.. _Zeroing:
+.. _Taring:
 
-Zeroing
+Taring
 -------
 
 **Flap**
 
-Open ``Flap_Position.vi`` **check this name** and do following steps to zero the flaps:
+Open ``Flap_Position.vi`` **check this name** and do following steps to tare the flaps:
 
 - Input zeros in the vector ``Zero Angles``
 - Run ``Flap_Position.vi`` with reading mode and manually move the flaps to zero degree (with a calibrator). Read current measurements.
@@ -82,19 +82,19 @@ Open ``Flap_Position.vi`` **check this name** and do following steps to zero the
 
 .. note::
 
-   There are **only two counters** available for zeroing the angle of flaps. Therefore, the counters have to be switched between four linear screws. Every time, the channels for one linear screw are activated. After tuning, they have to be **deactivated** to give space for the next one. The ``Clear Task`` function in Labview **WILL NOT** deactivate the physical channel. In this code, a ``Tristate`` function is used after each manipulation to deactivate the physical channel.
+   There are **only two counters** available for taring the angle of flaps. Therefore, the counters have to be switched between four linear screws. Every time, the channels for one linear screw are activated. After tuning, they have to be **deactivated** to give space for the next one. The ``Clear Task`` function in Labview **WILL NOT** deactivate the physical channel. In this code, a ``Tristate`` function is used after each manipulation to deactivate the physical channel.
 
 **ESP**
 
-Open ``ESP_Full_State.vi`` and do following steps to zero the flaps:
+Open ``ESP_Full_State.vi`` and do following steps to tare the flaps:
 
-- Check there is no disturbance during zeroing the ESP.
+- Check there is no disturbance during taring the ESP.
 - Run ``ESP_Full_State.vi`` and click "zero".
-- Wait for around 30s and click "stream" to see whether it is zeroed.
+- Wait for around 30s and click "stream" to see whether it is tared.
 
 **Endevco**
 
-Endevco pressure transducers are zeroed via amplifiers, do the following steps on the amplifier panel:
+Endevco pressure transducers are tared via amplifiers, do the following steps on the amplifier panel:
 
 - Select channel by pressing the button beside channel display.
 - Select function to "Zero"
@@ -102,11 +102,11 @@ Endevco pressure transducers are zeroed via amplifiers, do the following steps o
 
 **Force Balance**
 
-Open ``Target_Main.vi`` and switch to the force balance page. Press "Press to Tare" button and check whether the readings are zeroed. 
+Open ``Target_Main.vi`` and switch to the force balance page. Press "Press to Tare" button and check whether the readings are tared. 
 
 .. note::
 
-   **NOT Recommended** If zero the flaps with the body upside down, there will be still an offset on flaps due to gravity.
+   **NOT Recommended** If tare the flaps with the body upside down, there will be still an offset on flaps due to gravity.
 
 .. _Wind Tunnel Installation:
 
@@ -124,7 +124,7 @@ Labview scripts are saved in ``Trial_OnlyMicrophones.lvproj`` project **Name May
 
 .. note::
 
-   Remember to zero **Endevco pressure sensors**, **ESP pressure scanner** and **ATI force balance** before running wind tunnel or any code for the actual experiment. See :ref:`Zeroing <Zeroing>` for how to zero these measurements.
+   Remember to tare **Endevco pressure sensors**, **ESP pressure scanner** and **ATI force balance** before running wind tunnel or any code for the actual experiment. See :ref:`Taring <Taring>` for how to tare these measurements.
 
 **Baseline Flow (without control)**
 
