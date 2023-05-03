@@ -159,3 +159,7 @@ Labview scripts are saved in ``Trial_OnlyMicrophones.lvproj`` project **Name May
 - Run ``Target_Main.vi``.
 - Run ``main.py``.
 - Run ``Host_Main.vi``.
+
+.. note::
+
+   Usually a baseline flow test is conducted before and after evaluation to ensure there is no sensor drifting effect, or to use two baseline data to compensate sensor drifting.

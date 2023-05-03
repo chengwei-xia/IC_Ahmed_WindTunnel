@@ -43,7 +43,7 @@ A power box was designed to connect the flaps to PXI, together with a function o
 
 The dimensions of the flaps used in Brackston et al. 2016 (``flap set 1``) are recorded as:
 
-- Left/Right: **151.38mm** in width and **24mm** in length
+- Left/Right: **151.38mm** in width and **26mm** in length
 - Top/Bottom: **203.38mm** in width and **18mm** in length 
 
 In order to enhance the flow modulation effect, the flaps are lengthened to *flap length*/*body width or height* = 0.2 (``flap set 2``), corresponding to:
@@ -78,7 +78,7 @@ Once the ESP and microDAQ are set up successfully, you can see a blue light twin
 
 .. note::
 
-   Keep the pressure scanner in horizontal position to avoid dirt going in to the taps. For further instructions and guides, please refer to *A practical note on pressure scanner Chell microDAQ*.
+   Keep the pressure scanner in a horizontal position to avoid dirt going into the taps. For further instructions and guides, please refer to *A practical note on pressure scanner Chell microDAQ*.
 
 
 .. _Endevco:
@@ -96,7 +96,7 @@ On the Endevco sensor side, a circular connector of 5 pins is used. ``712 Series
 
 .. warning::
 
-   Wires inside the connectors are very thin and vulnerable. **Be careful** when connecting or moving the cables.
+   The wires inside the connectors are very thin and vulnerable. **Be careful** when connecting or moving the cables.
 
 The cabling on the sensor side is presented in the figure below. Four wires connect four ends of the Wheatstone bridge (colour matched), and the cable shield is connected to sensor cable.
 
@@ -145,11 +145,11 @@ This table lists the relation between the colour of sensor labels and the connec
 Force Balance (ATI)
 -------------------
 
-The type of the force balance is ATI Gamma FT17393, SI-130-10. (*Add a link to repo for calibration files*) The drawing of ATI Gamma is shown in figure below. On mounting side, there are four 6.6 thru holes for M6 SHCS, which will be fixed on a wooden plate underneath the Ahmed body. On tool side, four M6 tap holes are used to fix the body via tooling parts, and forces from the body will be applied to this side. 
+The type of the force balance is ATI Gamma FT17393, SI-130-10. (*Add a link to repo for calibration files*) The drawing of ATI Gamma is shown in the figure below. On the mounting side, there are four 6.6 thru holes for M6 SHCS, which will be fixed on a wooden plate underneath the Ahmed body. On the tool side, four M6 tap holes are used to fix the body via tooling parts, and forces from the body will be applied to this side. 
 
 .. image:: /_static/img/FB_Drawing.png
 
-For installation details, the mounting side on the wooden plate and the plate for tool side are shown respectively in the picture below.
+For installation details, the mounting side on the wooden plate and the plate for the tool side are shown respectively in the picture below.
 
 .. image:: /_static/img/FB_Plate.png
    :align: center
@@ -157,7 +157,7 @@ For installation details, the mounting side on the wooden plate and the plate fo
 
 .. note::
 
-   When installing, make sure the ``X`` direction on the force balance is aligned with flow direction.
+   When installing, make sure the ``X`` direction on the force balance is aligned with the flow direction.
 
 .. warning::
 

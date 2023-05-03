@@ -87,5 +87,25 @@ Then, the RT PXI can be connected to the PC in Labview:
 
    If VIs are saved and deployed under the PXI target, they will run on the PXI instead of the PC. More details of how to run the Labview codes please refer to :ref:`Experiment Manual <Experiment Manual>`. See a `YouTube tutorial <https://www.youtube.com/watch?v=I43pZm0SeCQ>`_ to get familiar with running Labview in RT target.
 
+.. PXI-Host Connection:
+
+PXI-Host Connection
+-------------------
+
+The PXI is connected to the host PC using a network with UDP protocol. To set up the connection, use consistent IP addresses for both sides, such as **192.168.10.xxx**. Specify also the **port number** for sending and receiving data on both PXI (Labview) and host PC (Python).
+
+
+The UDP time chart is shown in the figure below (to update).
+
+.. image:: /_static/img/TimeChart.png
+   :align: center
+   :scale: 60%
+
+.. note::
+
+   Be careful when setting the timeout for UDP read function in Labview. When this timeout is too large, during the resetting of RL algorithm, the frequency of the RT loop will drop to the timeout frequency and the RT feature will be broken. When this timeout is too small, Labview reads data from UDP before Python sends new data, so Labview will read data from the previous step (shifted when the code begins).
+
+
+
 
    
