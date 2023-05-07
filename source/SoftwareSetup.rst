@@ -87,7 +87,7 @@ Then, the RT PXI can be connected to the PC in Labview:
 
    If VIs are saved and deployed under the PXI target, they will run on the PXI instead of the PC. More details of how to run the Labview codes please refer to :ref:`Experiment Manual <Experiment Manual>`. See a `YouTube tutorial <https://www.youtube.com/watch?v=I43pZm0SeCQ>`_ to get familiar with running Labview in RT target.
 
-.. PXI-Host Connection:
+.. _PXI-Host Connection:
 
 PXI-Host Connection
 -------------------
