@@ -10,10 +10,10 @@ This section demonstrates the procedures of conducting this wind tunnel experime
 Cable Connection
 ----------------
 
-For the cables on the Ahmed body side, they need to be arranged properly to go through the four legs of the Ahmed body. The arrangement is presented in the following list and picture.
+For the cables on Ahmed body side, they need to be arranged properly to go through the four legs of Ahmed body. The arrangement is presented in the following list and picture.
 
 - Front Left: actuation cables and one encoder BNC cable.
-- Front Right: one ESP cable, one linear screw cable and encoder digital cables.
+- Front Right: one ESP cable, one linear screw cable, and encoder digital cables.
 - Back Left: three Endevco cables and one reference pressure tube.
 - Back Right: four Endevco cables.
 - Middle: one force balance cable.
@@ -22,13 +22,14 @@ For the cables on the Ahmed body side, they need to be arranged properly to go t
    :align: center
    :scale: 40%
 
-On the PXI & PC side, cables are connected in different ways as below.
+On the PXI & PC side, cables are mostly connected via the BNC-2110 panel, and details are listed in the following subsections.
 
-**Add figures if needed.**
+.. image:: /_static/img/PXI_Cables.png
+   :align: center
 
 **Encoder**
 
-Encoders are connected to PXI via BNC-2110 connector panel. The ports correspond to following:
+Encoders are connected to PXI via the BNC-2110 connector panel. The ports correspond to the following:
 
 - VDD -- Black wire -- 5V
 - Vss -- Green wire -- Digital Ground
@@ -38,14 +39,14 @@ Encoders are connected to PXI via BNC-2110 connector panel. The ports correspond
 
 **Flaps & Power Box**
 
-The actuators on flaps are connected to PXI via a power box. There are four AO signals from PXI to the power box as actuations. Another 8 AI signals are from power box to PXI for measuring voltages. Connection & ports are listed as below:
+The actuators on the flaps are connected to PXI via a power box. There are four AO signals from PXI to the power box as actuation. Another 8 AI signals are from the power box to PXI for measuring voltages. Connection & ports are listed below:
 
 - 4 * AO -- BNC cable -- PXI:AO0-AO3
 - 8 * AI -- BNC cable -- PXI:AI9-AI16
 
 **ESP**
 
-ESP is connected to an external power supply via power cables and to host PC via a network cable.
+ESP is connected to an external power supply via power cables and to the host PC via a network cable.
 
 **Endevco**
 
@@ -55,15 +56,15 @@ Endevco cables are connected to amplifiers with D-connectors first, and then con
 
 **Force Balance**
 
-Force balance is connected to PXI with an independent card. It is connected to PXI slot 5 in the current use.
+The force balance is connected to PXI with an independent card. It is connected to PXI slot 5 in the current use.
 
 **Linear Screw**
 
-Linear screws are driven by DC motors, and the power cables of these DC motors are connected to two chips which can switch between signals. The chips are connected to two counters on the BNC-2110 to generate PWM signals.
+Linear screws are driven by DC motors, and the power cables of these DC motors are connected to two chips that can switch between signals. The chips are connected to two counters on the BNC-2110 to generate PWM signals.
 
 .. note::
 
-   In Labview code, the port number and slot for connection may be changed over time. Please check the channel initialisation part for each sensors/actuators to make sure you use the correct ports or slots.
+   In the Labview code, the port number and slot for connection may be changed over time. Please check the channel initialization part for each sensor/actuator to make sure you use the correct ports or slots.
 
 
 .. _Taring:
@@ -76,8 +77,8 @@ Taring
 Open ``Flap_Position.vi`` **check this name** and do following steps to tare the flaps:
 
 - Input zeros in the vector ``Zero Angles``
-- Run ``Flap_Position.vi`` with reading mode and manually move the flaps to zero degree (with a calibrator). Read current measurements.
-- Stop ``Flap_Position.vi`` and input the measurements from last step as offsets.
+- Run ``Flap_Position.vi`` with reading mode and manually move the flaps to zero degrees (with a calibrator). Read current measurements.
+- Stop ``Flap_Position.vi`` and input the measurements from the last step as offsets.
 - Run ``Flap_Position.vi`` with calibration mode to compensate angle offsets.
 
 .. note::
@@ -86,7 +87,7 @@ Open ``Flap_Position.vi`` **check this name** and do following steps to tare the
 
 **ESP**
 
-Open ``ESP_Full_State.vi`` and do following steps to tare the flaps:
+Open ``ESP_Full_State.vi`` and do the following steps to tare the pressure measurements:
 
 - Check there is no disturbance during taring the ESP.
 - Run ``ESP_Full_State.vi`` and click "zero".
@@ -96,9 +97,9 @@ Open ``ESP_Full_State.vi`` and do following steps to tare the flaps:
 
 Endevco pressure transducers are tared via amplifiers, do the following steps on the amplifier panel:
 
-- Select channel by pressing the button beside channel display.
-- Select function to "Zero"
-- Change mode to "On" by pressing the "up" button, wait for few seconds.
+- Select a channel by pressing the button beside the channel display.
+- Select function "Zero"
+- Change mode to "On" by pressing the "up" button, and wait for a few seconds.
 
 **Force Balance**
 
@@ -106,14 +107,29 @@ Open ``Target_Main.vi`` and switch to the force balance page. Press "Press to Ta
 
 .. note::
 
-   **NOT Recommended** If tare the flaps with the body upside down, there will be still an offset on flaps due to gravity.
+   **NOT Recommended** If tare the flaps with the body upside down, there will still be an offset on flaps due to gravity.
 
 .. _Wind Tunnel Installation:
 
 Wind Tunnel Installation
 ------------------------
 
-**Update after moving to T2**
+The experiment has been set up in wind tunnel T2 at Imperial College London.
+The floor of the wind tunnel is lifted up for **45 mm** to remove the boundary layer from the contraction section of the tunnel. And a leading edge is installed at the front of the lifted floor to avoid flow separation. The Ahmed body sits on a holding plate (a round wooden plate) mounted on the tunnel floor.
+
+.. note::
+
+   The boundary layer thickness measures **47 mm** at around **800 mm* downstream from the contraction section, and the thickness is believed to be smaller than **45 mm** at the contraction. So we used **45 mm** standard ``mini-tech`` to support the floor, which greatly reduced the installation complexity. The boundary layer thickness on the lifted floor needs to be measured again in the future.
+
+During the installation, the Ahmed body is placed on the floor first, and the force balance is installed underneath the floor. The mounting side of the force balance is screwed to the bottom of the holding plate first. Then, the Ahmed body should be lifted up for around but less than **28 mm**, and screw the tool side of the force balance to the legs via a tool plate.
+
+The pictures of Ahmed body and the force balance installation are shown below.
+
+.. image:: /_static/img/Ahmed.png
+   :align: center
+
+.. image:: /_static/img/FB_install.png
+   :align: center
 
 .. _Code Running:
 

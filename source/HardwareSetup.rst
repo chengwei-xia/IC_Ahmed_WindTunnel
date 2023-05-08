@@ -7,7 +7,7 @@ This section covers all the hardware setup for the experiment, including sensor 
 
 The picture below shows the general setup in T1 Imperial College London, August 2022, including PXI, PC, wind tunnel and the Ahmed body.
 
-.. image:: /_static/img/HardwareSetup_Mar2023.png
+.. image:: /_static/img/Exp_System.png
    :align: center
    :scale: 60%
 
@@ -22,13 +22,13 @@ Four Avago AEAT-6012 encoders are used for angle measurements of four flaps. The
    :align: center
    :scale: 80%
 
-A circuit board is designed as the figure below, connecting all the encoders for convenience. The power supply ``VDD`` and ``Vss`` , chip selection ``CSn`` and clock signal ``CLK`` are shared on the circuit board. Four digital outputs are connected independently.
+A circuit board is designed as shown in the figure below, connecting all the encoders for convenience. The power supply ``VDD`` and ``Vss``, chip selection ``CSn``, and clock signal ``CLK`` are shared on the circuit board. Four digital outputs are connected independently.
 
 .. image:: /_static/img/Encoder_connection.png
    :align: center
    :scale: 80%
 
-The circuit box is sealed in a metal box to avoid electromagnetic interference. The output connection from circuit box to PXI (via BNC-2110 connector) can be referred to ref:`Cable Connection <Cable Connection>`
+The circuit box is sealed in a metal box to avoid electromagnetic interference. The output connection from the circuit box to PXI (via BNC-2110 connector) can be referred to ref:`Cable Connection <Cable Connection>`
 
 .. _Flaps:
 
